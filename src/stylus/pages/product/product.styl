@@ -1,0 +1,301 @@
+@import "../variables.styl"
+
+/* Product styles */
+#product
+  padding 0
+  // overflow visible
+  .title
+    font-size 38px
+    height 110px
+    absolute 50px 0 0 90px
+    z-index 4
+    margin auto 0
+    .bold
+      font-size 75px
+  .illustrations
+    z-index 0
+    overflow visible
+    &:before
+      padding-top 716px
+      transition: padding .3s linear 0s;
+    .illustration
+      height 1006px
+      width 1004px
+      &.show
+        opacity 1
+      &.hover-1
+      &.image-1
+      &.image-2
+      &.image-3
+        max-width 144%
+        absolute 0 -22%
+        transform scale(0.694)
+        transform-origin 50% 50%
+        background-position 50%  50%
+        background-size 100% auto
+        background-repeat no-repeat
+      &.hover-1
+        retina-image('~images/pages/product-1.png', 100% auto, "@2x")
+        animation none
+        max-height 0
+        z-index 3
+      &.image-1
+        retina-image('~images/pages/product-1.png', 100% auto, "@2x")
+        z-index 2
+      &.image-2
+        retina-image('~images/pages/product-2.png', 100% auto, "@2x")
+        z-index 1
+      &.image-3
+        retina-image('~images/pages/product-3.png', 100% auto, "@2x")
+        z-index 0
+  .texts
+    opacity 0
+    absolute 415px 0 0
+    width 100%
+    margin auto
+    display table
+    transition: top .3s linear 0s;
+  .subtitle
+    font-size 22px
+    font-weight 300
+    line-height 42px
+    letter-spacing 1px
+    margin-bottom 10px
+    text-align center
+  .text
+    width 100%
+    font-size 14px
+    text-align center
+    &.mobile-text
+      display none
+  .page-footer
+    size 100% 33px
+    margin -85px auto 0
+  .next-link
+    absolute false 0 18px
+    animation-name fade-in, bounce
+    animation-timing-function linear, none
+    animation-fill-mode forwards, none
+    animation-direction reverse, none
+    animation-duration .2s, 3s
+    animation-delay 1s, 2s
+    animation-iteration-count: 1, infinite
+    &:before 
+      height 0
+    
+  &.slide-1
+    .title
+      animation fade-in 1s linear 0.5s forwards
+    .illustrations 
+      .image-1
+        animation fade-in 1.5s linear 1s forwards
+      .image-2
+      .image-3
+        animation fade-out 0s linear forwards
+      .hover-1
+        max-height 1006px
+        transition opacity 0.5s linear,
+                   max-height 0s linear 3.5s
+        &.hover
+          cursor pointer
+          &:hover
+            opacity 1
+    .texts
+      display none
+    .next-link
+      animation-name fade-in, bounce
+      animation-timing-function linear, none
+      animation-fill-mode forwards, none
+      animation-duration 1s, 3s
+      animation-delay 2.5s, 2s
+      animation-iteration-count: 1, infinite
+      
+  &.slide-2
+    .title
+      animation fade-out 2s linear forwards
+    .illustrations
+      .animation
+        animation none
+      .hover-1
+        z-index -1
+        max-height 1006px
+        transition opacity 0.5s linear,
+                   max-height 0s linear 3.5s
+      .image-1
+        animation fade-out 2s linear forwards
+      .image-2
+        animation fade-in 2s linear 0s forwards
+      .image-2
+      .image-3
+        transform scale(0.694)
+    .texts
+    .text 
+      animation fade-in 1s linear 3.5s forwards
+    .next-link
+      animation fade-out 0.2s linear 0s forwards
+  &.slide-3
+    .title
+      animation fade-out 0s linear forwards
+    .illustrations
+      -webkit-transition -webkit-transform .7s cubic-bezier(0,0,0.58,1) 
+      -moz-transition -moz-transform .7s cubic-bezier(0,0,0.58,1) 
+      -o-transition -o-transform .7s cubic-bezier(0,0,0.58,1) 
+      transition transform .7s cubic-bezier(0,0,0.58,1)
+
+      -webkit-transition-timing-function: cubic-bezier(0,0,0.58,1); 
+      -moz-transition-timing-function: cubic-bezier(0,0,0.58,1); 
+      -o-transition-timing-function: cubic-bezier(0,0,0.58,1); 
+      transition-timing-function: cubic-bezier(0,0,0.58,1); /* linear */
+      .image-2
+      .image-3
+        transform none
+      .image-2
+        animation fade-out 1s linear 0s forwards
+        transition transform 1s ease-in-out 0s
+      .image-3
+        animation fade-in 1s linear 0s forwards
+        transition transform 1s ease-in-out 0s
+    .texts
+    .text
+      animation fade-in .8s linear 0s forwards
+      margin-bottom 41px
+    .next-link      
+      animation-name fade-in, bounce
+      animation-timing-function linear, none
+      animation-fill-mode forwards, none
+      animation-duration 1s, 3s
+      animation-delay 2s, 2s
+      animation-iteration-count: 1, infinite
+for $i in 0..30
+  $height = $expand_height + $i * $expand_height_smallstep
+  $content = floor($i / 2) * $expand_height_product
+  $content_link = floor($i / 2) * $expand_height_product_small
+  +media-query(only screen, min-height $height)
+    #product
+      .illustrations
+        &:before
+          padding-top (716px + $content) 
+      .next-link
+        &:before 
+          height $content_link
+      .texts
+        absolute (415px + $content) 0 0
++media-query(only screen, max-width $mobileWidth)
+  #product
+    // .page-content
+    //   transform translateY(-30px)
+    .illustrations
+      margin-bottom -30%
+      &:before
+        padding-top 100%
+    .title
+      width 335px
+      absolute 0
+      margin auto
+      text-align center
+      .bold 
+        // font-size 54px
+    .subtitle
+        font-size 20px
+    .text
+        font-size 12px
+    .texts
+      relative 0
+    .next-link
+      relative false 0 30px
+      &:before
+        height 0 !important
+    &.slide-1 
+      position static
+    &.slide-3 
+      .next-link
+        bottom 0
+  #product
+    .illustrations
+      .illustration
+        &.hover-1
+        &.image-1
+        &.image-2
+        &.image-3
+          transform none
++media-query(only screen, max-width 780px)
+  #product
+    .page-content
+      .illustrations
+        margin-top 0px
+        transform translateY(20%)
+    &.slide-1
+    &.slide-2
+      .next-link
+        absolute false 0 -302px  
+    &.slide-3
+      .page-content
+        .illustrations
+          transform translateY(0)
+    .texts
+      top -41px
+  
++media-query(only screen, max-height 400px)
+  #product
+    &.slide-1 
+      .next-link
+        absolute false 0 30px
+    &.slide-3 
+      .next-link
+        // padding-bottom 68px
+        bottom 30px
+    .illustrations
+      &:before
+        padding-top 120%
++media-query(only screen, max-width 500px)
+  #product
+    // .illustrations
+    //   &:before
+    //       padding-top 100%
+    .illustrations
+      &:before
+        padding-top 100%
+    .title
+      font-size 28px
+      .bold 
+        font-size 54px
+    .subtitle
+        font-size 20px
+        line-height 30px
+    .texts
+      top -24px
+    .text
+      display none
+      font-size 12px
+      line-height 24px
+      &.mobile-text
+        display block
+    .next-link
+      fixed false 0 42px
+    &.slide-1 
+      position static
+      .next-link
+        fixed false false 42px
+    &.slide-3 
+      .text
+        margin-bottom 38px
+      .next-link
+        fixed false false 42px
+    .page-content
+      &:before
+        height 1px
+        
++media-query(only screen, max-height 580px, max-width 500px)
+  #product
+    &.slide-3 
+      .next-link
+        // padding-bottom 68px
+        absolute false false 0
+// @media (max-width: 700px), handheld and (orientation: landscape) 
+//   #product
+//     &.slide-1 
+//       .next-link
+//         absolute false 0 30px 0
+
+        
+   
