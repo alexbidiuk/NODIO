@@ -61,7 +61,7 @@ module.exports = {
         include: [
           path.resolve(__dirname, "src"),
         ],
-        loader: 'pug-html-loader'
+        loader: 'pug-loader'
       },
       {
         test: /\.(svg|ttf|otf|eot|woff|woff2)$/,
@@ -169,9 +169,9 @@ module.exports = {
   devtool: 'source-map',
   // devtool: 'cheap-inline-module-source-map',
   devServer: {
-    // proxy: {
-    //   '*': 'http://localhost:8080'
-    // },
+    proxy: {
+      '*': 'http://localhost:8080'
+    },
     contentBase: './www',
     hot: true,
     colors: true,
